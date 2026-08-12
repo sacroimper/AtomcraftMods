@@ -1,0 +1,15 @@
+{
+  "id": "MoreSimAreaOptions",
+  "name": "MoreSimAreaOptions",
+  "description": "Adds more options to the simulation area settings",
+  "author": "sacroimper",
+  "version": "1.0",
+  "dllModules": [
+    {
+      "moduleId": "MoreSimAreaOptions/Main",
+      "dll": "MoreSimAreaOptions.dll",
+      "initClass": "MoreSimAreaOptions.ModEntry",
+      "dependencies": []
+    }
+  ]
+}

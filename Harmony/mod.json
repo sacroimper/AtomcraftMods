@@ -1,0 +1,20 @@
+{
+  "id": "0Harmony",
+  "name": "Harmony Wrapper",
+  "description": "Adds the Harmony library (used as dependency on other mods)",
+  "author": "sacroimper",
+  "version": "1.0",
+  "dllModules": [
+    {
+      "moduleId": "0Harmony/Library",
+      "dll": "0Harmony.dll",
+      "dependencies": []
+    },
+    {
+      "moduleId": "0Harmony/Wrapper",
+      "dll": "Harmony.dll",
+      "initClass": "Harmony.ModEntry",
+      "dependencies": ["0Harmony/Library"]
+    }
+  ]
+}

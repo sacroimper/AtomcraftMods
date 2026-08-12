@@ -1,0 +1,91 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="Atomcraft">
+            <HintPath>I:\SteamLibrary2\SteamApps\common\Atomcraft\data_Atomcraft_windows_x86_64\Atomcraft.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="GodotSharp">
+            <HintPath>I:\SteamLibrary2\SteamApps\common\Atomcraft\data_Atomcraft_windows_x86_64\GodotSharp.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <PackageReference Include="Lib.Harmony" Version="2.4.2"  />
+    </ItemGroup>
+
+    <ItemGroup>
+        <GDScripts Include="$(ProjectDir)GDScripts\**\*" />
+    </ItemGroup>
+
+    
+
+    <Target Name="CreateModZip" AfterTargets="Build">
+
+        <PropertyGroup>
+            <ModName>$(ProjectName)</ModName>
+            <ModDir>$(TargetDir)$(ModName)</ModDir>
+            <ModZip>$(ProjectDir)../Release/$(ModName).zip</ModZip>
+        </PropertyGroup>
+
+        <RemoveDir Directories="$(ModDir)" />
+
+        <MakeDir Directories="$(ModDir)" />
+
+        <Copy
+                SourceFiles="$(TargetPath)"
+                DestinationFolder="$(ModDir)/$(ModName)" />
+
+        <Copy
+                SourceFiles="$(TargetDir)0Harmony.dll"
+                DestinationFolder="$(ModDir)\$(ModName)" />
+
+        <Copy
+                SourceFiles="@(GDScripts)"
+                DestinationFolder="$(ModDir)/$(ModName)"/>
+
+        <Copy
+                SourceFiles="$(ProjectDir)mod.json"
+                DestinationFolder="$(ModDir)/$(ModName)" />
+
+        <Delete Files="$(ModZip)" />
+
+        <ZipDirectory
+                SourceDirectory="$(ModDir)"
+                DestinationFile="$(ModZip)"
+                Overwrite="true" />
+
+        <RemoveDir Directories="$(ModDir)" />
+
+        <Message
+                Importance="high"
+                Text="Mod ZIP created: $(ModZip)" />
+
+    </Target>
+
+    <Target Name="InstallModZip" AfterTargets="Build">
+
+        <PropertyGroup>
+            <InstallDir>$(AppData)/Godot/app_userdata/Atomcraft/Mods</InstallDir>
+        </PropertyGroup>
+
+        <Delete Files="$(InstallDir)/$(ModName).zip" />
+
+        <Copy
+                SourceFiles="$(ModZip)"
+                DestinationFolder="$(InstallDir)" />
+
+        <Message
+                Importance="high"
+                Text="Mod ZIP installed: $(InstallDir)/$(ProjectName).zip" />
+
+    </Target>
+
+    
+</Project>
