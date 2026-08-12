@@ -10,11 +10,11 @@
 
     <ItemGroup>
         <Reference Include="Atomcraft">
-            <HintPath>I:\SteamLibrary2\SteamApps\common\Atomcraft\data_Atomcraft_windows_x86_64\Atomcraft.dll</HintPath>
+            <HintPath>$(GameInstallDir)\data_Atomcraft_windows_x86_64\Atomcraft.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <Reference Include="GodotSharp">
-            <HintPath>I:\SteamLibrary2\SteamApps\common\Atomcraft\data_Atomcraft_windows_x86_64\GodotSharp.dll</HintPath>
+            <HintPath>$(GameInstallDir)\data_Atomcraft_windows_x86_64\GodotSharp.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <PackageReference Include="Lib.Harmony" Version="2.4.2"  />
