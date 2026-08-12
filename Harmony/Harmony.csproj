@@ -29,7 +29,7 @@
     <Target Name="CreateModZip" AfterTargets="Build">
 
         <PropertyGroup>
-            <ModName>$(ProjectName)</ModName>
+            <ModName>0$(ProjectName)</ModName>
             <ModDir>$(TargetDir)$(ModName)</ModDir>
             <ModZip>$(ProjectDir)../Release/$(ModName).zip</ModZip>
         </PropertyGroup>
