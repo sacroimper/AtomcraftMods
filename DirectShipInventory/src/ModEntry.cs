@@ -8,7 +8,7 @@ public static class ModEntry
 {
     public static void Initialize()
     {
-        var harmony = new Harmony("com.sacroimper.Harmony");
+        var harmony = new Harmony("sacroimper.DirectShipInventory");
 
         GD.Print($"[DirectShipInventory] Harmony PatchAll.");
         

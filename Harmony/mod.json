@@ -1,14 +1,15 @@
 {
   "id": "0Harmony",
-  "name": "Harmony Wrapper",
-  "description": "Adds the Harmony library (used as dependency on other mods)",
+  "name": "Harmony Wrapper (Deprecated)",
+  "description": "(Deprecated: this library is already loaded by the mod loader). Adds the Harmony library (used as dependency on other mods).",
   "author": "sacroimper",
-  "version": "1.0",
+  "version": "1.0.0",
   "dllModules": [
     {
       "moduleId": "0Harmony/Library",
       "dll": "0Harmony.dll",
-      "dependencies": []
+      "dependencies": [],
+      "optional": true
     },
     {
       "moduleId": "0Harmony/Wrapper",

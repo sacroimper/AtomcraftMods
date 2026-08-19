@@ -1,15 +1,14 @@
 {
   "id": "DirectShipInventory",
-  "name": "DirectShipInventory",
-  "description": "Opens de ship inventory directly when pressing Enter near it",
+  "name": "Direct Ship Inventory",
+  "description": "Opens de ship inventory directly when pressing Enter near it, skipping the intermediate screen.",
   "author": "sacroimper",
-  "version": "1.0",
-  "dllModules": [
+  "version": "1.0.0",
+  "modules": [
     {
       "moduleId": "DirectShipInventory/Main",
       "dll": "DirectShipInventory.dll",
-      "initClass": "DirectShipInventory.ModEntry",
-      "dependencies": ["0Harmony/Library"]
+      "initClass": "DirectShipInventory.ModEntry"
     }
   ]
 }
