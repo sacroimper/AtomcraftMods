@@ -1,0 +1,18 @@
+{
+  "id": "Contracts",
+  "name": "Contracts",
+  "description": "Add repeatable contracts to be able to keep automated machines working.",
+  "author": "sacroimper",
+  "version": "0.1.0",
+  "modules": [
+    {
+      "moduleId": "Contracts/Main",
+      "dll": "Contracts.dll",
+      "initClass": "Contracts.ModEntry",
+      "materials": "Data/Materials/",
+      "reactions": "Data/Reactions/",
+      "translations": "Data/Translations/Translations.json",
+      "loadAsResourcePack": true
+    }
+  ]
+}

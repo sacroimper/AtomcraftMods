@@ -1,0 +1,8 @@
+{
+  "en": {
+    "sacroimper.MAT_TECH_CONTRACT_INPUT": "Contract Input",
+    "sacroimper.CRAFTABLE_CONTRACT_INPUT": "Sends input pixel to correspondant contract, if one exists",
+    "sacroimper.MAT_TECH_CONTRACT_OUTPUT": "Contract Output",
+    "sacroimper.CRAFTABLE_CONTRACT_OUTPUT": "Recevie pixel from contract reward, if available"
+  }
+}

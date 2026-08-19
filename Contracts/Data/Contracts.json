@@ -1,0 +1,47 @@
+[
+  {
+    "ContractTypeId": "test1",
+    "Cost": [
+      {
+        "MaterialTypeName": "Carbon",
+        "Amount": 5
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Hematite",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "test2",
+    "Cost": [
+      {
+        "MaterialTypeName": "Hematite",
+        "Amount": 5
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Carbon",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "test3",
+    "Cost": [
+      {
+        "MaterialTypeName": "Water",
+        "Amount": 5
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Seawater",
+        "Amount": 5
+      }
+    ]
+  }
+]

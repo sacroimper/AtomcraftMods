@@ -1,0 +1,36 @@
+[
+  {
+    "Name": "Contract Input",
+    "PrimaryInput": "Bits of Ship Input",
+    "Inputs": {
+      "Bits of Ship Input": 1,
+      "Seawater": 1
+    },
+    "Outputs": {
+      "Bits of Contract Input": 1
+    },
+    "Catalysts": {},
+    "Electrolysis": false,
+    "Temperature": 0,
+    "MaxTemperature": null,
+    "ChangeInTemperature": 0,
+    "Probability": 0
+  },
+  {
+    "Name": "Contract Output",
+    "PrimaryInput": "Bits of Ship Output",
+    "Inputs": {
+      "Bits of Ship Output": 1,
+      "Seawater": 1
+    },
+    "Outputs": {
+      "Bits of Contract Output": 1
+    },
+    "Catalysts": {},
+    "Electrolysis": false,
+    "Temperature": 0,
+    "MaxTemperature": null,
+    "ChangeInTemperature": 0,
+    "Probability": 0
+  }
+]

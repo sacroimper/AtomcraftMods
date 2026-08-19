@@ -2,9 +2,10 @@
 
 This is a list of the mods I've made for the game Atomcraft. To play with the mods it is required to launch the game with a mod loader (like this one I've made: [GodotMonoModLoader](https://github.com/sacroimper/GodotMonoModLoader))
 
-- **Harmony** ([Download](https://github.com/sacroimper/AtomcraftMods/raw/refs/heads/main/Release/0Harmony.zip)): This is a library used by other mods. Has no content on its own.
 - **DirectShipInventory** ([Download](https://github.com/sacroimper/AtomcraftMods/raw/refs/heads/main/Release/DirectShipInventory.zip)): Opens the ship inventory directly when pressing Enter near it, skipping the intermediate window. **(Requires Harmony)**
 - **MoreSimAreaOptions** ([Download](https://github.com/sacroimper/AtomcraftMods/raw/refs/heads/main/Release/MoreSimAreaOptions.zip)): Adds more options to the Settings > Sim > Player simulation area (from 8x8 to 20x20). More simulated area lets zoom out more.
+- **Contracts** (WIP): Adds repeatable contracts (like trades, but automatable with Contract Input/Output pixels). Perfect to keep the machines working.
+- Harmony (Deprecated): This is library is already included in the mod loader.
 
 # Installation instructions
 
