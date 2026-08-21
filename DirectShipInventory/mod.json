@@ -3,7 +3,7 @@
   "name": "Direct Ship Inventory",
   "description": "Opens de ship inventory directly when pressing Enter near it, skipping the intermediate screen.",
   "author": "sacroimper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "modules": [
     {
       "moduleId": "DirectShipInventory/Main",
