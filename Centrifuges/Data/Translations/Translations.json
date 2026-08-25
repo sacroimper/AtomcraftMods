@@ -1,0 +1,11 @@
+{
+  "en": {
+    "sacroimper.MAT_STATIC_CENTRIFUGE": "Centrifuge",
+    "sacroimper.MAT_STATIC_CENTRIFUGE_CLOCKWISE": "Centrifuge (Clockwise)",
+    "sacroimper.MAT_STATIC_CENTRIFUGE_COUNTER": "Centrifuge (Counter-clockwise)",
+    "sacroimper.CRAFTABLE_CENTRIFUGE": "Rotates all 8 pixels around, pushing them away if possible",
+    "sacroimper.MAT_LIQUID_RED_BLOOD_CELL": "Red Blood Cell",
+    "sacroimper.MAT_LIQUID_BLOOD_PLASMA": "Blood Plasma",
+    "sacroimper.MAT_LIQUID_WHITE_BLOOD_CELL": "White Blood Cell"
+  }
+}

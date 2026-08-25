@@ -30,6 +30,7 @@ public static class Contracts
     public class Serializable_ContractType
     {
         public string ContractTypeId;
+        public string Name;
         public List<SaveData_MaterialAmount> Cost = [];
         public List<SaveData_MaterialAmount> Reward = [];
 
@@ -40,6 +41,7 @@ public static class Contracts
         public Serializable_ContractType(ContractType contractType)
         {
             ContractTypeId = contractType.ContractTypeId;
+            Name = contractType.Name;
             Cost = contractType.Cost.ConvertAll(m => new SaveData_MaterialAmount(m));
             Reward = contractType.Reward.ConvertAll(m => new SaveData_MaterialAmount(m));
         }
@@ -66,12 +68,14 @@ public static class Contracts
     public class ContractType
     {
         public string ContractTypeId;
+        public string Name;
         public List<MaterialAmount> Cost;
         public List<MaterialAmount> Reward;
         
-        public ContractType(string contractTypeId, List<MaterialAmount> cost, List<MaterialAmount> reward)
+        public ContractType(string contractTypeId, string name, List<MaterialAmount> cost, List<MaterialAmount> reward)
         {
             ContractTypeId = contractTypeId;
+            Name = name;
             Cost = cost;
             Reward = reward;
         }
@@ -79,6 +83,7 @@ public static class Contracts
         public ContractType(Serializable_ContractType contractType)
         {
             ContractTypeId = contractType.ContractTypeId;
+            Name = contractType.Name;
             Cost = contractType.Cost.ConvertAll(m => new MaterialAmount(m));
             Reward = contractType.Reward.ConvertAll(m => new MaterialAmount(m));
         }

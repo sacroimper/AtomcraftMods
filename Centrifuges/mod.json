@@ -1,0 +1,17 @@
+{
+  "id": "Centrifuges",
+  "name": "Centrifuges",
+  "description": "Adds two new mechanical pixels that spin all 8 pixels around them, one clockwise and one counter-clockwise.",
+  "author": "sacroimper",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "moduleId": "Centrifuges/Main",
+      "dll": "Centrifuges.dll",
+      "initClass": "Centrifuges.ModEntry",
+      "materials": "Data/Materials/",
+      "reactions": "Data/Reactions/",
+      "translations": "Data/Translations/Translations.json"
+    }
+  ]
+}

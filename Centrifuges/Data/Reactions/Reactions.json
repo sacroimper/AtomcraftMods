@@ -1,0 +1,80 @@
+[
+  {
+    "Name": "Centrifuged Blood (Clockwise) (W)",
+    "PrimaryInput": "Blood",
+    "Inputs": {
+      "Blood": 5
+    },
+    "Outputs": {
+      "Red Blood Cell": 2,
+      "Blood Plasma": 2,
+      "White Blood Cell": 1
+    },
+    "Catalysts": {
+      "Centrifuge (Clockwise)": 1
+    },
+    "Electrolysis": false,
+    "Temperature": 278,
+    "MaxTemperature": 313,
+    "ChangeInTemperature": 0,
+    "Probability": 240
+  },
+  {
+    "Name": "Centrifuged Blood (Clockwise)",
+    "PrimaryInput": "Blood",
+    "Inputs": {
+      "Blood": 4
+    },
+    "Outputs": {
+      "Red Blood Cell": 2,
+      "Blood Plasma": 2
+    },
+    "Catalysts": {
+      "Centrifuge (Clockwise)": 1
+    },
+    "Electrolysis": false,
+    "Temperature": 278,
+    "MaxTemperature": 313,
+    "ChangeInTemperature": 0,
+    "Probability": 241
+  },
+  {
+    "Name": "Centrifuged Blood (Counter-clockwise) (W)",
+    "PrimaryInput": "Blood",
+    "Inputs": {
+      "Blood": 5
+    },
+    "Outputs": {
+      "Red Blood Cell": 2,
+      "Blood Plasma": 2,
+      "White Blood Cell": 1
+    },
+    "Catalysts": {
+      "Centrifuge (Counter-clockwise)": 1
+    },
+    "Electrolysis": false,
+    "Temperature": 278,
+    "MaxTemperature": 313,
+    "ChangeInTemperature": 0,
+    "Probability": 240
+  },
+  {
+    "Name": "Centrifuged Blood (Counter-clockwise)",
+    "PrimaryInput": "Blood",
+    "Inputs": {
+      "Blood": 4
+    },
+    "Outputs": {
+      "Red Blood Cell": 2,
+      "Blood Plasma": 2
+    },
+    "Catalysts": {
+      "Centrifuge (Counter-clockwise)": 1
+    },
+    "Electrolysis": false,
+    "Temperature": 278,
+    "MaxTemperature": 313,
+    "ChangeInTemperature": 0,
+    "Probability": 241
+  }
+]

@@ -1,6 +1,7 @@
 using Atomcraft;
 using HarmonyLib;
 using Godot;
+using Console = System.Console;
 
 namespace Contracts;
 
@@ -17,27 +18,24 @@ public static class ModEntry
         GD.Print($"[Contracts] Contracts Initialized.");
     }
 
-    public static void OnWorldLoad(Contracts.SaveData_Contracts? modData)
+    public static void OnUniverseLoad(Contracts.SaveData_Contracts? modData)
     {
         if (modData != null)
         {
             Contracts.ActiveContracts = modData.ActiveContracts;
             Contracts.Inventory = new Contracts.ContractsInventory(modData.Inventory);
-            GD.Print("modData: ", modData.Inventory.MaterialsIn[0].MaterialTypeName);
-            GD.Print("modData: ", modData.Inventory.ToString());
         }
         else
         {
-            Contracts.ActiveContracts = [];
+            Contracts.ActiveContracts = ["chain1_1"]; // 
             Contracts.Inventory = new Contracts.ContractsInventory();
-
-            Contracts.ActiveContracts.AddRange(Contracts.ContractTypes.Keys);
         }
 
-        GD.Print(Contracts.Inventory.ToString());
-    }
+        // Temporal until
+        Contracts.ActiveContracts = [.. Contracts.ContractTypes.Keys];
+}
 
-    public static Contracts.SaveData_Contracts OnWorldSave()
+    public static Contracts.SaveData_Contracts OnUniverseSave()
     {
         return new Contracts.SaveData_Contracts(Contracts.ActiveContracts, Contracts.Inventory);
     }
@@ -51,14 +49,14 @@ public static class ModEntry
             {
                 { "Carbon", 1 },
                 { "Bronze", 1 }
-            }, "sacroimper.CRAFTABLE_CONTRACT_INPUT");
+            }, null, "sacroimper.CRAFTABLE_CONTRACT_INPUT");
             Craftables.GetCategory(CraftableCategoryIndex.Movement).MaterialTypeIds
                 .Add("Bits of Contract Input".ToMaterialTypeId());
             Craftables.Add("Bits of Contract Output", new Dictionary<string, int>
             {
                 { "Carbon", 1 },
                 { "Bronze", 1 }
-            }, "sacroimper.CRAFTABLE_CONTRACT_OUTPUT");
+            }, null, "sacroimper.CRAFTABLE_CONTRACT_OUTPUT");
             Craftables.GetCategory(CraftableCategoryIndex.Movement).MaterialTypeIds
                 .Add("Bits of Contract Output".ToMaterialTypeId());
         }
@@ -85,7 +83,15 @@ public static class ModEntry
         [HarmonyPatch(nameof(Simulation.Init))]
         public static void InitPostfix()
         {
-            Contracts.Init();
+            try
+            {
+                Contracts.Init();
+            }
+            catch (Exception e)
+            {
+                GD.PrintErr("Error loading contract list: ", e);
+                throw;
+            }
         }
 
         [HarmonyPostfix]

@@ -1,36 +1,167 @@
 [
   {
-    "ContractTypeId": "test1",
+    "ContractTypeId": "chain1_1",
+    "Name": "First trades (Carbon)",
     "Cost": [
       {
         "MaterialTypeName": "Carbon",
-        "Amount": 5
+        "Amount": 2000
       }
     ],
     "Reward": [
       {
         "MaterialTypeName": "Hematite",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain1_2",
+    "Name": "First trades (Steel)",
+    "Cost": [
+      {
+        "MaterialTypeName": "Steel Alloy",
+        "Amount": 1000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Celestine",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain1_3",
+    "Name": "First trades (Strontium)",
+    "Cost": [
+      {
+        "MaterialTypeName": "Strontium",
+        "Amount": 5
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Celestine",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain2_1",
+    "Name": "Chain 2 - 1",
+    "Cost": [
+      {
+        "MaterialTypeName": "Berry",
+        "Amount": 150
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Cuprite",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain3_1",
+    "Name": "Chain 3 - 1",
+    "Cost": [
+      {
+        "MaterialTypeName": "Cornflower Petal",
+        "Amount": 200
+      },
+      {
+        "MaterialTypeName": "Marigold Petal",
+        "Amount": 200
+      },
+      {
+        "MaterialTypeName": "Rose Petal",
+        "Amount": 200
+      },
+      {
+        "MaterialTypeName": "Sunflower Petal",
+        "Amount": 200
+      },
+      {
+        "MaterialTypeName": "Violet Petal",
+        "Amount": 200
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Cassiterite",
+        "Amount": 250
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain3_2",
+    "Name": "Chain 3 - 2",
+    "Cost": [
+      {
+        "MaterialTypeName": "Bronze",
+        "Amount": 3000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Carbon",
+        "Amount": 300
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain4_1",
+    "Name": "Chain 4 - 1",
+    "Cost": [
+      {
+        "MaterialTypeName": "Potassium",
+        "Amount": 3000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Carbon",
+        "Amount": 300
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "test1",
+    "Name": "Test 1",
+    "Cost": [
+      {
+        "MaterialTypeName": "Ceramic",
+        "Amount": 5
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Clay",
         "Amount": 5
       }
     ]
   },
   {
     "ContractTypeId": "test2",
+    "Name": "Test 2",
     "Cost": [
       {
-        "MaterialTypeName": "Hematite",
+        "MaterialTypeName": "Clay",
         "Amount": 5
       }
     ],
     "Reward": [
       {
-        "MaterialTypeName": "Carbon",
+        "MaterialTypeName": "Ceramic",
         "Amount": 5
       }
     ]
   },
   {
     "ContractTypeId": "test3",
+    "Name": "Test 3",
     "Cost": [
       {
         "MaterialTypeName": "Water",
