@@ -1,7 +1,7 @@
 {
   "id": "MoreSimAreaOptions",
-  "name": "More Sim Area Options",
-  "description": "Adds more options to the simulation area settings.",
+  "name": "More Simulation Area Options",
+  "description": "Adds more options to the simulation area settings (from 8x8 to 20x20).",
   "author": "sacroimper",
   "version": "1.0.0",
   "modules": [
