@@ -216,6 +216,7 @@ public class CentrifugeMaterial : StaticMaterial
                 //     GD.Print("         SWAPPED!!!!!");
                 // }
                 BaseMaterial.SwapWithTarget(idxs[i2], posX + offsets[i2].X, posY + offsets[i2].Y, idxs[i1], posX + offsets[i1].X, posY + offsets[i1].Y, field, tick);
+                field.UpdatedWithinCurrentTick[idxs[i2]] = false;
                 mats[i2] = mats[i1];
                 somethingMoved = true;
             }
@@ -237,18 +238,6 @@ public class CentrifugeMaterial : StaticMaterial
             }
         }
 
-
-
-
-        // int num = posY - 1;
-        // int sourceX = posX - 1;
-        // int sourceX2 = posX - 1;
-        // int sourceY = posY - 1;
-        // int targetX = posX + 1;
-        // int targetY = posY - 1;
-        // ConveyorMaterial.TryConvey(sourceX, posY, posX, num, field, tick);
-        // ConveyorMaterial.TryConvey(sourceX2, sourceY, posX, num, field, tick);
-        // ConveyorMaterial.TryConvey(posX, num, targetX, targetY, field, tick);
         return somethingMoved;
     }
 }
