@@ -1,0 +1,15 @@
+{
+  "id": "Centrifuges.Test",
+  "name": "Centrifuges Test",
+  "description": "Automated tests for the Centrifuges mod. Requires the TestHarness mod. Not needed to play.",
+  "author": "sacroimper",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "moduleId": "Centrifuges.Test/Main",
+      "dll": "Centrifuges.Test.dll",
+      "initClass": "Centrifuges.Test.ModEntry",
+      "dependencies": ["Centrifuges/Main", "TestHarness/Main"]
+    }
+  ]
+}

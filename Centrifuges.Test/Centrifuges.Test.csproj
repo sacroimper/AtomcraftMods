@@ -1,0 +1,86 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <!--
+      Tests for the Centrifuges mod, run inside the game by the Atomcraft test harness.
+
+      A sibling directory rather than a subdirectory of Centrifuges, because it is a peer
+      mod with its own id, zip, and lifecycle, and because a project nested inside another
+      project's directory is swept up by that project's **/*.cs glob: the parent build fails
+      with CS0579 duplicate assembly attributes unless it explicitly excludes it.
+
+      It is a separate mod, not a module of Centrifuges: the loader treats a missing
+      dependency as an error, so a test module shipped inside Centrifuges.zip would show a
+      red entry in the mod loader report for every player without the harness installed.
+    -->
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Centrifuges.Test</AssemblyName>
+        <RootNamespace>Centrifuges.Test</RootNamespace>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="Atomcraft">
+            <HintPath>$(GameInstallDir)\data_Atomcraft_windows_x86_64\Atomcraft.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="GodotSharp">
+            <HintPath>$(GameInstallDir)\data_Atomcraft_windows_x86_64\GodotSharp.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <!--
+          The harness ships its own DLL; a test mod references it and ships nothing.
+
+          Normally nothing to set: the harness's own build-mod.sh supplies both
+          GameInstallDir and TestHarnessDir, and a checkout exports the assembly to the
+          path it defaults to. That is the route the README documents, and the one the
+          PR describes.
+
+          To build this project directly, point TestHarnessDir at either the export from
+          a harness checkout or an extracted release. A release zip contains a single
+          TestHarness/ folder, so the path points inside it:
+
+              unzip TestHarness.zip -d /somewhere
+              dotnet build Centrifuges.Test.csproj \
+                  -p:GameInstallDir=<Atomcraft install> \
+                  -p:TestHarnessDir=/somewhere/TestHarness
+
+          Either way the harness must be 0.2.x, which is what ModEntry's RequireVersion
+          call checks at run time.
+        -->
+        <Reference Include="Atomcraft.TestHarness">
+            <HintPath>$(TestHarnessDir)\Atomcraft.TestHarness.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <!-- Bundled by the mod loader; never shipped by a mod. -->
+        <PackageReference Include="Lib.Harmony" Version="2.4.2">
+            <Private>false</Private>
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <Target Name="CreateModZip" AfterTargets="Build">
+        <PropertyGroup>
+            <ModName>Centrifuges.Test</ModName>
+            <StageDir>$(TargetDir)stage/$(ModName)</StageDir>
+            <ModZip>$(ProjectDir)../Release/$(ModName).zip</ModZip>
+        </PropertyGroup>
+        <RemoveDir Directories="$(TargetDir)stage" />
+        <MakeDir Directories="$(StageDir)" />
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(StageDir)" />
+        <Copy SourceFiles="$(ProjectDir)mod.json" DestinationFolder="$(StageDir)" />
+        <Delete Files="$(ModZip)" />
+        <ZipDirectory SourceDirectory="$(TargetDir)stage" DestinationFile="$(ModZip)" Overwrite="true" />
+        <Message Importance="high" Text="Mod ZIP created: $(ModZip)" />
+    </Target>
+
+    <Target Name="InstallModZip" AfterTargets="CreateModZip" Condition="'$(TestInstallDir)' != ''">
+        <MakeDir Directories="$(TestInstallDir)/Mods" />
+        <Copy SourceFiles="$(ModZip)" DestinationFolder="$(TestInstallDir)/Mods" />
+        <Message Importance="high" Text="Mod ZIP installed: $(TestInstallDir)/Mods/$(ModName).zip" />
+    </Target>
+
+</Project>

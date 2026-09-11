@@ -24,7 +24,6 @@ public class CentrifugeMaterial : StaticMaterial
         [EightWayDirection.UpRight, EightWayDirection.Up],
     ];
     
-    
     public static EightWayDirection[][] CentrifugeDirectionsCounterCloclwise = [
         [EightWayDirection.UpLeft, EightWayDirection.Up],
         [EightWayDirection.UpLeft, EightWayDirection.Up],
@@ -108,8 +107,6 @@ public class CentrifugeMaterial : StaticMaterial
             if (centrifugeDirections[i1].Select(direction => direction.GetAdjacentInDirection(curX, curY))
                 .Any(target => ConveyorMaterial.TryConvey(curX, curY, target.X, target.Y, field, tick)))
             {
-                // GD.Print(" ---- TryConvey succeed ----");
-                // GD.Print(" i1: ", i1, " curX: ", curX, " curY: ", curY);
                 somethingMoved = true;
             }
             
@@ -117,7 +114,6 @@ public class CentrifugeMaterial : StaticMaterial
             mats[i1] = field.Get(idxs[i1]);
         }
         
-
         int someStatic = NONE;
         bool allAir = true;
         for (int i = 0; i < offsets.Length; i++)
@@ -145,10 +141,6 @@ public class CentrifugeMaterial : StaticMaterial
             // End just before a full cycle
             int end = start + 6;
             bool needAir = someStatic != 8;
-            // if (posX == 2981 && posY == 2442)
-            // {
-            //     GD.Print("--------------------------------------------");
-            // }
 
             for (int i = start; i <= end; i++)
             {
@@ -156,17 +148,6 @@ public class CentrifugeMaterial : StaticMaterial
                 int i1 = (Clockwise ? 7 - i : i) & 7;
                 int i2 = (Clockwise ? i1 - 1 : i1 + 1) & 7;
 
-                // if (posX == 2981 && posY == 2442)
-                // {
-                //     GD.Print("i: ", i, " needAir: ", needAir);
-                //     GD.Print("i1: ", i1, " mat1: ", mats[i1], " static1: ", Materials.IsStatic(mats[i1]));
-                //     GD.Print("i2: ", i2, " mat2: ", mats[i2], " static2: ", Materials.IsStatic(mats[i2]));
-                // }
-                // GD.Print("i1: ", i1, " mat1: ", mats[i1], " static1: ", Materials.IsStatic(mats[i1]), " normal1: ", BaseMaterial.IsNormal(mats[i1]));
-                // GD.Print(" isMatch: ", BaseMaterial.IsMatchFilterOffset(mats[i1]), " isNonMatch: ", BaseMaterial.IsNonMatchFilterOffset(mats[i1]), " baseId: ", BaseMaterial.BaseId(mats[i1]));
-                // GD.Print("i2: ", i2, " mat2: ", mats[i2], " static2: ", Materials.IsStatic(mats[i2]), " normal2: ", BaseMaterial.IsNormal(mats[i2]));
-                // GD.Print(" isMatch: ", BaseMaterial.IsMatchFilterOffset(mats[i2]), " isNonMatch: ", BaseMaterial.IsNonMatchFilterOffset(mats[i2]), " baseId: ", BaseMaterial.BaseId(mats[i2]));
-                
                 if (IsStatic(mats[i1])) // || (mats[i1] != -1 && !BaseMaterial.IsNormal(mats[i1])))
                 {
                     needAir = true;
@@ -189,10 +170,6 @@ public class CentrifugeMaterial : StaticMaterial
                 {
                     i++;
                     int i3 = (Clockwise ? i2 - 1 : i2 + 1) & 7;
-                    // if (posX == 2981 && posY == 2442)
-                    // {
-                    //     GD.Print("i3: ", i3, " mat3: ", mats[i3], " static3: ", Materials.IsStatic(mats[i3]), " canTraverse: ", CanTraverse(mats[i3],mats[i2]));
-                    // }
                     if (!CanTraverse(mats[i3],mats[i2]))
                     {
                         needAir = true;
@@ -211,10 +188,6 @@ public class CentrifugeMaterial : StaticMaterial
                     continue;
                 }
 
-                // if (posX == 2981 && posY == 2442)
-                // {
-                //     GD.Print("         SWAPPED!!!!!");
-                // }
                 BaseMaterial.SwapWithTarget(idxs[i2], posX + offsets[i2].X, posY + offsets[i2].Y, idxs[i1], posX + offsets[i1].X, posY + offsets[i1].Y, field, tick);
                 field.UpdatedWithinCurrentTick[idxs[i2]] = false;
                 mats[i2] = mats[i1];
