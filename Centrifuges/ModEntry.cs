@@ -38,12 +38,23 @@ public static class ModEntry
     {
         public static void Postfix()
         {
+            Register("Centrifuge (Clockwise)", clockwise: true);
+            Register("Centrifuge (Counter-clockwise)", clockwise: false);
+        }
+
+        private static void Register(string materialName, bool clockwise)
+        {
+            MaterialType? materialType = Materials.TryGetMaterialType(materialName);
+            if (!materialType.HasValue)
+            {
+                GD.PrintErr($"[Centrifuges] Material '{materialName}' not found. " +
+                            "Data/Materials/Materials.json may be missing from the mod zip. " +
+                            "Skipping its custom class; the pixel will not spin.");
+                return;
+            }
+
             Materials.AddBaseMaterial(new CentrifugeMaterial(
-                Materials.GetBaseMaterialId("Centrifuge (Clockwise)"),
-                Materials.TryGetMaterialType("Centrifuge (Clockwise)").Value, true));
-            Materials.AddBaseMaterial(new CentrifugeMaterial(
-                Materials.GetBaseMaterialId("Centrifuge (Counter-clockwise)"),
-                Materials.TryGetMaterialType("Centrifuge (Counter-clockwise)").Value, false));
+                Materials.GetBaseMaterialId(materialName), materialType.Value, clockwise));
         }
     }
 
