@@ -8,10 +8,10 @@
     {
       "moduleId": "Contracts/Main",
       "dll": "Contracts.dll",
-      "initClass": "Contracts.ModEntry",
-      "materials": "Data/Materials/",
-      "reactions": "Data/Reactions/",
-      "translations": "Data/Translations/Translations.json",
+      "entryClass": "Contracts.ModEntry",
+      "materials": "Resources/Materials/",
+      "reactions": "Resources/Reactions/",
+      "translations": "Resources/Translations/Translations.json",
       "loadAsResourcePack": true
     }
   ]

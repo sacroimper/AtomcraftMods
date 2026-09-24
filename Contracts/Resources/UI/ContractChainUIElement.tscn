@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Contracts/UI/ContractChainUIElement.cs" id="1_chain"]
+
+[node name="ContractChainUIElement" type="VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 8
+script = ExtResource("1_chain")
+
+[node name="ChainName" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 22
+text = "Contract Chain"
+
+[node name="ContractsContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12

@@ -29,7 +29,7 @@ public class ContractInputActiveMaterial : StaticMaterial
         }
         //Game.LocalSpaceship.AddMaterial(num, 1);
 
-        if (Contracts.Inventory.GetAmountOfMaterialIn(materialTypeId) >= Contracts.GetActiveContractsCapacityIn(materialTypeId) * 2)
+        if (Contracts.Inventory.GetAmountOfMaterialIn(materialTypeId) >= Contracts.GetActiveContractsCapacityIn(materialTypeId))
         {
             return false;
         }

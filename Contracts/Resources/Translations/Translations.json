@@ -3,6 +3,8 @@
     "sacroimper.MAT_TECH_CONTRACT_INPUT": "Contract Input",
     "sacroimper.CRAFTABLE_CONTRACT_INPUT": "Sends input pixel to correspondent contract, if one exists",
     "sacroimper.MAT_TECH_CONTRACT_OUTPUT": "Contract Output",
-    "sacroimper.CRAFTABLE_CONTRACT_OUTPUT": "Receive pixel from contract reward, if available"
+    "sacroimper.CRAFTABLE_CONTRACT_OUTPUT": "Receive pixel from contract reward, if available",
+    "sacroimper.CONTRACT_UI_COST": "Cost",
+    "sacroimper.CONTRACT_UI_REWARD": "Reward"
   }
 }

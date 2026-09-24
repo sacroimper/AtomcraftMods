@@ -71,13 +71,13 @@ public class ContractOutputActiveMaterial : StaticMaterial
         if (flag1 && flag2)
         {
             materialTypeId = tick % 2 == 0 ? materialTypeId1 : materialTypeId2;
-            state = tick % 2 == 0 ? material1.State : material2.State;
+            state = tick % 2 == 0 ? material1!.State : material2!.State;
         } else if (flag1) {
             materialTypeId = materialTypeId1;
-            state = material1.State;
+            state = material1!.State;
         } else {
             materialTypeId = materialTypeId2;
-            state = material2.State;
+            state = material2!.State;
         }
 
         if (TryOutputMaterial(materialTypeId, state, posX, posY, field, tick))

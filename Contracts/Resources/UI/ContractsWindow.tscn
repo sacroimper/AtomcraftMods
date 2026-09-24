@@ -1,0 +1,150 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Contracts/UI/ContractsWindow.cs" id="1_contract_window"]
+[ext_resource type="Texture2D" uid="uid://cewpal6qmw7co" path="res://Art/UI/ui_status_x.png" id="2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bg"]
+texture_margin_left = 4
+texture_margin_right = 4
+texture_margin_top = 4
+texture_margin_bottom = 4
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_inner_border"]
+texture_margin_left = 4
+texture_margin_right = 4
+texture_margin_top = 4
+texture_margin_bottom = 4
+content_margin_left = 4
+content_margin_right = 4
+content_margin_top = 4
+content_margin_bottom = 4
+
+[node name="ContractsWindow" type="PanelContainer"]
+visible = false
+anchors_preset = 0
+offset_left = 292.0
+offset_top = 131.0
+offset_right = 1360.0
+offset_bottom = 699.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_bg")
+script = ExtResource("1_contract_window")
+
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+size_flags_horizontal = 3
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/Control"]
+text = "Contracts"
+theme_override_font_sizes/font_size = 24
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32
+offset_top = 0
+offset_right = 0
+offset_bottom = 32
+custom_minimum_size = Vector2(32 ,32)
+texture_normal = ExtResource("2")
+stretch_mode = 0
+
+[node name="TopArea" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TopArea"]
+size_flags_vertical = 0
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/TopArea/HBoxContainer"]
+size_flags_vertical = 0
+size_flags_horizontal = 0
+custom_minimum_size = Vector2(24 ,0)
+
+[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TopArea/HBoxContainer"]
+unique_name_in_owner = true
+fit_content = true
+size_flags_vertical = 3
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TopArea/HBoxContainer"]
+size_flags_vertical = 0
+size_flags_horizontal = 0
+
+[node name="StarsLabel" type="Label" parent="MarginContainer/VBoxContainer/TopArea/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+size_flags_vertical = 0
+size_flags_horizontal = 0
+horizontal_alignment = 2
+
+[node name="Star" type="TextureRect" parent="MarginContainer/VBoxContainer/TopArea/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+size_flags_vertical = 0
+size_flags_horizontal = 0
+custom_minimum_size = Vector2(24 ,24)
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/TopArea/HBoxContainer/HBoxContainer"]
+size_flags_vertical = 0
+size_flags_horizontal = 0
+custom_minimum_size = Vector2(32 ,0)
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TopArea"]
+unique_name_in_owner = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+size_flags_vertical = 3
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+size_flags_vertical = 3
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_inner_border")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+size_flags_vertical = 3
+size_flags_horizontal = 3
+vertical_scroll_mode = 3
+horizontal_scroll_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/ScrollContainer"]
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 9
+
+[node name="ChainsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+theme_override_constants/separation = 24
+
+[node name="VScrollBar" type="VScrollBar" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+size_flags_vertical = 0
+size_flags_horizontal = 3
+
+[node name="HScrollBar" type="HScrollBar" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(8 ,0)

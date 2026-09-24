@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Atomcraft;
 using Godot;
+using GodotMonoModLoader;
+using HarmonyLib;
 using Newtonsoft.Json;
 using FileAccess = Godot.FileAccess;
 
@@ -9,10 +11,13 @@ namespace Contracts;
 public static class Contracts
 {
 
+    public static int INPUT_MAX_STORAGE = 5;
+    public static int OUTPUT_MAX_STORAGE = 5;
+    
     [Serializable]
     public class SaveData_MaterialAmount
     {
-        public string MaterialTypeName;
+        public string MaterialTypeName = null!;
         public int Amount;
 
         public SaveData_MaterialAmount()
@@ -29,22 +34,14 @@ public static class Contracts
     [Serializable]
     public class Serializable_ContractType
     {
-        public string ContractTypeId;
-        public string Name;
+        public string ContractTypeId = null!;
+        public string Name = null!;
+        public string Chain = null!;
+        public int StarsRequired = 0;
+        //public string Icon;
         public List<SaveData_MaterialAmount> Cost = [];
         public List<SaveData_MaterialAmount> Reward = [];
 
-        public Serializable_ContractType()
-        {
-        }
-
-        public Serializable_ContractType(ContractType contractType)
-        {
-            ContractTypeId = contractType.ContractTypeId;
-            Name = contractType.Name;
-            Cost = contractType.Cost.ConvertAll(m => new SaveData_MaterialAmount(m));
-            Reward = contractType.Reward.ConvertAll(m => new SaveData_MaterialAmount(m));
-        }
     }
     
     public class MaterialAmount
@@ -69,40 +66,86 @@ public static class Contracts
     {
         public string ContractTypeId;
         public string Name;
+        public string Chain;
+        public int StarsRequired;
+        public Texture2D? Icon;
         public List<MaterialAmount> Cost;
         public List<MaterialAmount> Reward;
         
-        public ContractType(string contractTypeId, string name, List<MaterialAmount> cost, List<MaterialAmount> reward)
-        {
-            ContractTypeId = contractTypeId;
-            Name = name;
-            Cost = cost;
-            Reward = reward;
-        }
+        public string? PreviousContractTypeId;
         
         public ContractType(Serializable_ContractType contractType)
         {
             ContractTypeId = contractType.ContractTypeId;
             Name = contractType.Name;
+            Chain = contractType.Chain;
+            StarsRequired = contractType.StarsRequired;
+            
+            // if (!string.IsNullOrEmpty(contractType.Icon))
+            // {
+            //     Texture2D texture2D = (Texture2D)ResourceLoader.Load(contractType.Icon);
+            //     if (texture2D == null)
+            //     {
+            //         GD.PrintErr("Failed to load contract texture from path: " + contractType.Icon);
+            //     }
+            //     else
+            //     {
+            //         Icon = texture2D;
+            //     }
+            // }
+
             Cost = contractType.Cost.ConvertAll(m => new MaterialAmount(m));
             Reward = contractType.Reward.ConvertAll(m => new MaterialAmount(m));
         }
 
     }
-    
-    [Serializable]
-    public class SaveData_Contracts
+
+    public class ContractChain(string name)
     {
-        public List<string> ActiveContracts = [];
+        public string Name = name;
+        public List<ContractType> Contracts = new();
+    }
+
+
+    [Serializable]
+    public class SaveData_Contract
+    {
+        public string ContractTypeId;
+        public bool Active;
+        public int TimesDone;
+
+        public SaveData_Contract(string contractTypeId)
+        {
+            ContractTypeId = contractTypeId;
+        }
+
+        public int GetStars()
+        {
+            return TimesDone switch
+            {
+                >= 50 => 5,
+                >= 25 => 4,
+                >= 10 => 3,
+                >= 5  => 2,
+                >= 1  => 1,
+                _     => 0
+            };
+        }
+    }
+
+    [Serializable]
+    public class SaveData_Contracts : IModSaveData
+    {
+        public List<SaveData_Contract> ContractList = [];
         public SaveData_ContractsInventory Inventory = new();
 
         public SaveData_Contracts()
         {
         }
 
-        public SaveData_Contracts(List<string> activeContracts, ContractsInventory inventory)
+        public SaveData_Contracts(Dictionary<string, SaveData_Contract> contractList, ContractsInventory inventory)
         {
-            ActiveContracts = activeContracts;
+            ContractList = contractList.Values.ToList();
             Inventory = new(inventory);
         }
     }
@@ -247,9 +290,53 @@ public static class Contracts
         }
     }
 
-    public static Dictionary<string, ContractType> ContractTypes;
-    public static List<string> ActiveContracts;
-    public static ContractsInventory Inventory;
+    public static Dictionary<string, ContractType> ContractTypes { get; set; } = [];
+    public static Dictionary<string, ContractChain> Chains { get; set; } = [];
+    public static Dictionary<string, SaveData_Contract> ContractsData { get; set; } = [];
+    public static ContractsInventory Inventory { get; set; } = new();
+    public static ContractsWindow Window { get; set; } = null!;
+
+    public static SaveData_Contract? GetData(string contractTypeId)
+    {
+        return ContractsData.GetValueOrDefault(contractTypeId);
+    }
+    
+    public static int GetCurrentStars()
+    {
+        return ContractsData.Values.Sum(c => c.GetStars());
+    }
+    
+    public static void ToggleContractActive(string contractTypeId)
+    {
+        if (ContractsData.TryGetValue(contractTypeId, out SaveData_Contract? contract))
+        {
+            contract.Active = !contract.Active;
+        }
+        else
+        {
+            ContractsData.Add(contractTypeId, new SaveData_Contract(contractTypeId)
+            {
+                Active = true
+            });
+        }
+    }
+
+    public static IEnumerable<string> ActiveContracts()
+    {
+        return ContractsData.Values.Where((c) => c.Active).Select((c) => c.ContractTypeId);
+    }
+
+    public static bool IsActive(string contractTypeId)
+    {
+        return GetData(contractTypeId)?.Active ?? false;
+    }
+
+    public static bool IsUnlocked(string contractTypeId)
+    {
+        ContractType? contractType = ContractTypes.GetValueOrDefault(contractTypeId);
+        string? previousContractTypeId = contractType?.PreviousContractTypeId;
+        return (previousContractTypeId == null || GetData(previousContractTypeId)?.TimesDone > 0) && GetCurrentStars() >= contractType?.StarsRequired;
+    }
     
     public static bool LoadFile(string filePath, out string content)
     {
@@ -285,27 +372,84 @@ public static class Contracts
     public static void Init()
     {
         GD.Print("[Contracts] Loading contracts...");
-        if (LoadFile("res://Contracts/Data/Contracts.json", out var content))
+        Chains = new Dictionary<string, ContractChain>();
+        ContractTypes = new Dictionary<string, ContractType>();
+        
+        if (LoadContracts())
         {
-            List<Serializable_ContractType> contractTypes = JsonConvert.DeserializeObject<List<Serializable_ContractType>>(content);
-            if (contractTypes != null)
+            GD.Print("[Contracts] ", ContractTypes.Count, " contracts loaded.");
+            try
             {
-                ContractTypes = contractTypes.ToDictionary(kvp => kvp.ContractTypeId, kvp => new ContractType(kvp));
+                Window = GD.Load<PackedScene>("res://Contracts/Resources/UI/ContractsWindow.tscn").Instantiate<ContractsWindow>();
+                Window.Init();
+                Gameplay.Windows.Add(Window);
+                Gameplay.Instance.AddChild(Window);
             }
-            else
+            catch (Exception e)
             {
-                ContractTypes = new Dictionary<string, ContractType>();
+                GD.PrintErr("Error initializing contract window: ", e);
+                throw;
             }
-            
+
         }
     }
+
+    public static bool LoadContracts()
+    {
+        try
+        {
+            if (LoadContractsFile("res://Contracts/Resources/Contracts.json"))
+            {
+                return true;
+            }
+        }
+        catch (Exception e)
+        {
+            GD.PrintErr("[Contracts] Error loading contracts: ", e);
+        }
+
+        return false;
+    }
+
+    public static bool LoadContractsFile(string file)
+    {
+        if (LoadFile(file, out var content))
+        {
+            List<Serializable_ContractType>? contractTypes = JsonConvert.DeserializeObject<List<Serializable_ContractType>>(content);
+            if (contractTypes != null)
+            {
+
+                foreach (Serializable_ContractType sContractType in contractTypes)
+                {
+                    ContractType contractType = new ContractType(sContractType);
+
+                    if (ContractTypes.TryAdd(contractType.ContractTypeId, contractType))
+                    {
+                        if (!Chains.TryGetValue(contractType.Chain, out ContractChain? chain))
+                        {
+                            chain = new ContractChain(contractType.Chain);
+                            Chains.Add(contractType.Chain, chain);
+                        }
+                        else
+                        {
+                            contractType.PreviousContractTypeId = chain.Contracts.Last().ContractTypeId;
+                        }
+
+                        chain.Contracts.Add(contractType);
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        return false;
+    }
     
-    
-        
     public static int GetActiveContractsCapacityIn(short materialTypeId)
     {
         int amount = 0;
-        foreach (string contractTypeId in ActiveContracts)
+        foreach (string contractTypeId in ActiveContracts())
         {
             if (ContractTypes.TryGetValue(contractTypeId, out var contract))
             {
@@ -318,13 +462,13 @@ public static class Contracts
                 }
             }
         }
-        return amount;
+        return amount * INPUT_MAX_STORAGE;
     }
-    
+
     public static int GetActiveContractsCapacityOut(short materialTypeId)
     {
         int amount = 0;
-        foreach (string contractTypeId in ActiveContracts)
+        foreach (string contractTypeId in ActiveContracts())
         {
             if (ContractTypes.TryGetValue(contractTypeId, out var contract))
             {
@@ -337,7 +481,7 @@ public static class Contracts
                 }
             }
         }
-        return amount;
+        return amount * OUTPUT_MAX_STORAGE;
     }
     
     public static bool TryApplyContract(string contractTypeId)
@@ -353,7 +497,7 @@ public static class Contracts
             // GD.Print("Not enough material In: " + contractTypeId);
             return false;
         }
-        if (contract.Reward.Any(materialOut => 2 * GetActiveContractsCapacityOut(materialOut.MaterialTypeId) < (Inventory.GetAmountOfMaterialOut(materialOut.MaterialTypeId) + materialOut.Amount)))
+        if (contract.Reward.Any(materialOut => GetActiveContractsCapacityOut(materialOut.MaterialTypeId) < (Inventory.GetAmountOfMaterialOut(materialOut.MaterialTypeId) + materialOut.Amount)))
         {
             // GD.Print("Not enough capacity Out: " + contractTypeId);
             return false;
@@ -370,6 +514,18 @@ public static class Contracts
             Inventory.AddMaterialOut(materialOut.MaterialTypeId, materialOut.Amount);
         }
 
+        ContractsData[contractTypeId].TimesDone += 1;
+
+        if (Window.Visible)
+        {
+            Window.Refresh();
+        }
+
         return true;
+    }
+
+    public static void OpenContractsWindow()
+    {
+        Gameplay.SetCurrentWindowId((WindowId) 13);
     }
 }

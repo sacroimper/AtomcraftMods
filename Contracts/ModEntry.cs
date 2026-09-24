@@ -1,43 +1,52 @@
 using Atomcraft;
 using HarmonyLib;
 using Godot;
-using Console = System.Console;
+using GodotMonoModLoader;
+using GodotMonoModLoader.Atomcraft;
+using Newtonsoft.Json.Linq;
 
 namespace Contracts;
 
-public static class ModEntry
+public class ModEntry : AtomcraftModEntry, IModInitializationProvider<JTokenDictionaryModConfig>, IUniverseLoadSaveProvider<Contracts.SaveData_Contracts>
 {
-    public static void Initialize()
+    
+    public void Initialize(InitializationContext<JTokenDictionaryModConfig> context)
     {
-        var harmony = new Harmony("sacroimper.Contracts");
-
-        GD.Print("[Contracts] Harmony PatchAll.");
-
-        harmony.PatchAll();
-
-        GD.Print($"[Contracts] Contracts Initialized.");
+        
+        HarmonyPatchAll();
+        
+        GD.Print("[Contracts]: Harmony PatchAll.");
+        
+        context.ModConfig.SetAndGetWithDefault(ref Contracts.INPUT_MAX_STORAGE);
+        context.ModConfig.SetAndGetWithDefault(ref Contracts.OUTPUT_MAX_STORAGE);
+        
+        GD.Print("[Contracts]: Contracts Initialized.");
     }
 
-    public static void OnUniverseLoad(Contracts.SaveData_Contracts? modData)
+    public void OnUniverseLoad(UniverseLoadContext<Contracts.SaveData_Contracts> context)
     {
+        Contracts.SaveData_Contracts? modData = context.ModData;
         if (modData != null)
         {
-            Contracts.ActiveContracts = modData.ActiveContracts;
+            Contracts.ContractsData = modData.ContractList.ToDictionary(contract => contract.ContractTypeId, contract => contract);
             Contracts.Inventory = new Contracts.ContractsInventory(modData.Inventory);
         }
         else
         {
-            Contracts.ActiveContracts = ["chain1_1"]; // 
+            Contracts.ContractsData = [];
             Contracts.Inventory = new Contracts.ContractsInventory();
         }
 
-        // Temporal until
-        Contracts.ActiveContracts = [.. Contracts.ContractTypes.Keys];
-}
+    }
 
-    public static Contracts.SaveData_Contracts OnUniverseSave()
+    public Contracts.SaveData_Contracts? OnUniverseSave(UniverseSaveContext context)
     {
-        return new Contracts.SaveData_Contracts(Contracts.ActiveContracts, Contracts.Inventory);
+        if (Contracts.ContractsData.Count > 0)
+        {
+            return new Contracts.SaveData_Contracts(Contracts.ContractsData, Contracts.Inventory);
+        }
+
+        return null;
     }
 
     [HarmonyPatch(typeof(Craftables), nameof(Craftables.Init))]
@@ -69,10 +78,10 @@ public static class ModEntry
         {
             Materials.AddBaseMaterial(new ContractInputActiveMaterial(
                 Materials.GetBaseMaterialId("Contract Input (Active)"),
-                Materials.TryGetMaterialType("Contract Input (Active)").Value));
+                Materials.TryGetMaterialType("Contract Input (Active)")!.Value));
             Materials.AddBaseMaterial(new ContractOutputActiveMaterial(
                 Materials.GetBaseMaterialId("Contract Output (Active)"),
-                Materials.TryGetMaterialType("Contract Output (Active)").Value));
+                Materials.TryGetMaterialType("Contract Output (Active)")!.Value));
         }
     }
 
@@ -98,7 +107,34 @@ public static class ModEntry
         [HarmonyPatch(nameof(Simulation.Step))]
         public static void StepPostfix()
         {
-            Contracts.ActiveContracts?.ForEach(contractTypeId => Contracts.TryApplyContract(contractTypeId));
+            Contracts.ActiveContracts().Do(contractTypeId => Contracts.TryApplyContract(contractTypeId));
         }
+    }
+    
+    
+    [HarmonyPatch(typeof(MapWindow))]
+    public class MapWindowPatch
+    {
+        [HarmonyPostfix]
+        [HarmonyPatch(nameof(MapWindow.Init))]
+        public static void InitPostfix(MapWindow __instance)
+        {
+            Button contractsButton = new Button()
+            {
+                Text = "Contracts",
+                OffsetLeft = 20,
+                OffsetTop = 450,
+                OffsetRight = 80,
+                OffsetBottom = 510,
+            };
+            
+            __instance.AddChild(contractsButton);
+            contractsButton.Pressed += Contracts.OpenContractsWindow;
+        }
+    }
+
+    void IUniverseLoadSaveProvider.OnUniverseSave(UniverseSaveContext context)
+    {
+        throw new NotImplementedException();
     }
 }

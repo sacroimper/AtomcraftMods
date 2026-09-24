@@ -2,6 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
+        <PlatformTarget>x64</PlatformTarget>
+        <Prefer32Bit>false</Prefer32Bit>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -19,16 +21,43 @@
             <HintPath>$(GameInstallDir)\data_Atomcraft_windows_x86_64\Newtonsoft.Json.dll</HintPath>
             <Private>false</Private>
         </Reference>
+        <Reference Include="GodotMonoModLoader">
+            <HintPath>$(GameInstallDir)\GodotMonoModLoader\GodotMonoModLoader.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <PackageReference Include="Godot.SourceGenerators" Version="4.4.0" >
+            <OutputItemType>Analyzer</OutputItemType>
+            <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+        </PackageReference>
         <PackageReference Include="Lib.Harmony" Version="2.4.2" />
     </ItemGroup>
 
     <PropertyGroup>
-        <GDScriptsDir>$(ProjectDir)GDScripts</GDScriptsDir>
-        <DataDir>$(ProjectDir)Data</DataDir>
+        <GodotProjectDir>$(MSBuildProjectDirectory)</GodotProjectDir>
+        <GodotTargetPlatform>Windows</GodotTargetPlatform>
+        <GodotPlatform>Windows</GodotPlatform>
+        <GodotTargetArchitecture>x86_64</GodotTargetArchitecture>
+        <GodotApiConfiguration>Release</GodotApiConfiguration>
+        <GodotRealTIsDouble>false</GodotRealTIsDouble>
+        <EnableGodotGenerators>true</EnableGodotGenerators>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <CompilerVisibleProperty Include="GodotProjectDir" />
+        <CompilerVisibleProperty Include="GodotTargetPlatform" />
+        <CompilerVisibleProperty Include="GodotPlatform" />
+        <CompilerVisibleProperty Include="GodotTargetArchitecture" />
+        <CompilerVisibleProperty Include="GodotApiConfiguration" />
+        <CompilerVisibleProperty Include="GodotRealTIsDouble" />
+        <CompilerVisibleProperty Include="EnableGodotGenerators" />
+    </ItemGroup>
+    
+    
+    <PropertyGroup>
+        <ResourcesDir>$(ProjectDir)Resources</ResourcesDir>
     </PropertyGroup>
     <ItemGroup>
-        <GDScripts Include="$(GDScriptsDir)\**\*" />
-        <Data Include="$(DataDir)\**\*" />
+        <Resources Include="$(ResourcesDir)\**\*" />
     </ItemGroup>
 
 
@@ -49,9 +78,9 @@
                 SourceFiles="$(TargetPath)"
                 DestinationFolder="$(ModDir)/$(ModName)" />
 
-        <Copy   Condition="Exists($(DataDir))"
-                SourceFiles="@(Data)"
-                DestinationFiles="@(Data->'$(ModDir)/$(ModName)/Data/%(RecursiveDir)%(Filename)%(Extension)')"/>
+        <Copy   Condition="Exists($(ResourcesDir))"
+                SourceFiles="@(Resources)"
+                DestinationFiles="@(Resources->'$(ModDir)/$(ModName)/Resources/%(RecursiveDir)%(Filename)%(Extension)')"/>
 
         <Copy
                 SourceFiles="$(ProjectDir)mod.json"
@@ -72,7 +101,7 @@
 
     </Target>
 
-    <Target Name="InstallModZip" AfterTargets="Build">
+    <Target Name="InstallModZip" AfterTargets="Build" DependsOnTargets="CreateModZip">
 
         <PropertyGroup>
             <InstallDir>$(AppData)/Godot/app_userdata/Atomcraft/Mods</InstallDir>

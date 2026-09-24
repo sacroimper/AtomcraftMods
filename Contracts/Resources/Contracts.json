@@ -1,0 +1,530 @@
+[
+  {
+    "ContractTypeId": "chain1_1",
+    "Name": "Carbon",
+    "Chain": "Chain 1",
+    "Cost": [
+      {
+        "MaterialTypeName": "Carbon",
+        "Amount": 2000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Cuprite Powder",
+        "Amount": 1000
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain1_2",
+    "Name": "Copper",
+    "Chain": "Chain 1",
+    "StarsRequired": 2,
+    "Cost": [
+      {
+        "MaterialTypeName": "Copper",
+        "Amount": 2000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Hematite",
+        "Amount": 1200
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain1_3",
+    "Name": "Steel",
+    "Chain": "Chain 1",
+    "StarsRequired": 4,
+    "Cost": [
+      {
+        "MaterialTypeName": "Steel",
+        "Amount": 2400
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Celestine",
+        "Amount": 700
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain1_4",
+    "Name": "Strontium",
+    "Chain": "Chain 1",
+    "StarsRequired": 10,
+    "Cost": [
+      {
+        "MaterialTypeName": "Strontium",
+        "Amount": 1400
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Cobaltite",
+        "Amount": 800
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain1_5",
+    "Name": "Cobalt Steel",
+    "Chain": "Chain 1",
+    "StarsRequired": 18,
+    "Cost": [
+      {
+        "MaterialTypeName": "Cobalt Steel",
+        "Amount": 800
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Pyrolusite",
+        "Amount": 300
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain1_6",
+    "Name": "Manganese",
+    "Chain": "Chain 1",
+    "StarsRequired": 28,
+    "Cost": [
+      {
+        "MaterialTypeName": "Manganese",
+        "Amount": 400
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Vanadinite",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain1_7",
+    "Name": "Vanadium Carbide Steel",
+    "Chain": "Chain 1",
+    "StarsRequired": 38,
+    "Cost": [
+      {
+        "MaterialTypeName": "Vanadium Carbide Steel",
+        "Amount": 1000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Carbon",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain2_1",
+    "Name": "Berries",
+    "Chain": "Chain 2",
+    "StarsRequired": 6,
+    "Cost": [
+      {
+        "MaterialTypeName": "Berry",
+        "Amount": 50
+      },
+      {
+        "MaterialTypeName": "Fiber",
+        "Amount": 200
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Pentlandite Powder",
+        "Amount": 600
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain2_2",
+    "Name": "Nickel",
+    "Chain": "Chain 2",
+    "StarsRequired": 12,
+    "Cost": [
+      {
+        "MaterialTypeName": "Nickel",
+        "Amount": 1200
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Bauxite",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain2_3",
+    "Name": "Aluminum",
+    "Chain": "Chain 2",
+    "StarsRequired": 20,
+    "Cost": [
+      {
+        "MaterialTypeName": "Aluminum",
+        "Amount": 1000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Lead Oxide",
+        "Amount": 380
+      },
+      {
+        "MaterialTypeName": "Lead Selenide",
+        "Amount": 20
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain2_4",
+    "Name": "Lead",
+    "Chain": "Chain 2",
+    "StarsRequired": 28,
+    "Cost": [
+      {
+        "MaterialTypeName": "Lead",
+        "Amount": 1200
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Bismuthinite",
+        "Amount": 600
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain2_5",
+    "Name": "Bismuth",
+    "Chain": "Chain 2",
+    "StarsRequired": 38,
+    "Cost": [
+      {
+        "MaterialTypeName": "Bismuth",
+        "Amount": 800
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Thortveitite",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain2_6",
+    "Name": "Scandium",
+    "Chain": "Chain 2",
+    "StarsRequired": 50,
+    "Cost": [
+      {
+        "MaterialTypeName": "Scandium",
+        "Amount": 500
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Carbon",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain3_1",
+    "Name": "Flower Petals",
+    "Chain": "Chain 3",
+    "StarsRequired": 20,
+    "Cost": [
+      {
+        "MaterialTypeName": "Cornflower Petal",
+        "Amount": 400
+      },
+      {
+        "MaterialTypeName": "Marigold Petal",
+        "Amount": 400
+      },
+      {
+        "MaterialTypeName": "Rose Petal",
+        "Amount": 400
+      },
+      {
+        "MaterialTypeName": "Sunflower Petal",
+        "Amount": 400
+      },
+      {
+        "MaterialTypeName": "Violet Petal",
+        "Amount": 400
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Cassiterite",
+        "Amount": 1000
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain3_2",
+    "Name": "Bronze",
+    "Chain": "Chain 3",
+    "StarsRequired": 28,
+    "Cost": [
+      {
+        "MaterialTypeName": "Bronze",
+        "Amount": 3000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Sphalerite",
+        "Amount": 1500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain3_3",
+    "Name": "Brass",
+    "Chain": "Chain 3",
+    "StarsRequired": 36,
+    "Cost": [
+      {
+        "MaterialTypeName": "Brass",
+        "Amount": 3000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Chromite",
+        "Amount": 600
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain3_4",
+    "Name": "Chromium",
+    "Chain": "Chain 3",
+    "StarsRequired": 46,
+    "Cost": [
+      {
+        "MaterialTypeName": "Chromium",
+        "Amount": 1500
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Borax",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain3_5",
+    "Name": "Boron",
+    "Chain": "Chain 3",
+    "StarsRequired": 58,
+    "Cost": [
+      {
+        "MaterialTypeName": "Boron",
+        "Amount": 2000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Carbon",
+        "Amount": 300
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain4_1",
+    "Name": "Compost",
+    "Chain": "Chain 4",
+    "StarsRequired": 42,
+    "Cost": [
+      {
+        "MaterialTypeName": "Compost",
+        "Amount": 500
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Dolomite",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain4_2",
+    "Name": "Magnesium",
+    "Chain": "Chain 4",
+    "StarsRequired": 52,
+    "Cost": [
+      {
+        "MaterialTypeName": "Magnesium",
+        "Amount": 500
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Calcium Fluoride",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain4_3",
+    "Name": "Fluorine",
+    "Chain": "Chain 4",
+    "StarsRequired": 62,
+    "Cost": [
+      {
+        "MaterialTypeName": "Fluorine Gas",
+        "Amount": 500
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Lepidolite",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain4_4",
+    "Name": "Lithium",
+    "Chain": "Chain 4",
+    "StarsRequired": 74,
+    "Cost": [
+      {
+        "MaterialTypeName": "Lithium",
+        "Amount": 500
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Carbon",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain5_1",
+    "Name": "Potassium",
+    "Chain": "Chain 5",
+    "StarsRequired": 60,
+    "Cost": [
+      {
+        "MaterialTypeName": "Potassium",
+        "Amount": 500
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Barite",
+        "Amount": 300
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain5_2",
+    "Name": "Barium",
+    "Chain": "Chain 5",
+    "StarsRequired": 70,
+    "Cost": [
+      {
+        "MaterialTypeName": "Barium",
+        "Amount": 500
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Columbite",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "chain5_3",
+    "Name": "Niobium & Tantalum",
+    "Chain": "Chain 5",
+    "StarsRequired": 80,
+    "Cost": [
+      {
+        "MaterialTypeName": "Niobium",
+        "Amount": 1000
+      },
+      {
+        "MaterialTypeName": "Tantalum",
+        "Amount": 1000
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Carbon",
+        "Amount": 500
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "test1",
+    "Name": "Test 1",
+    "Chain": "Test",
+    "Cost": [
+      {
+        "MaterialTypeName": "Ceramic",
+        "Amount": 5
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Clay",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "test2",
+    "Name": "Test 2 with a very very very large name",
+    "Chain": "Test",
+    "Cost": [
+      {
+        "MaterialTypeName": "Clay",
+        "Amount": 5
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Ceramic",
+        "Amount": 5
+      }
+    ]
+  },
+  {
+    "ContractTypeId": "test3",
+    "Name": "Test 3 with a large name",
+    "Chain": "Test",
+    "Cost": [
+      {
+        "MaterialTypeName": "Water",
+        "Amount": 5
+      }
+    ],
+    "Reward": [
+      {
+        "MaterialTypeName": "Seawater",
+        "Amount": 5
+      }
+    ]
+  }
+]
