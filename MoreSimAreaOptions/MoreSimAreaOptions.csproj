@@ -2,6 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
+        <PlatformTarget>x64</PlatformTarget>
+        <Prefer32Bit>false</Prefer32Bit>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>MoreSimAreaOptions</RootNamespace>
@@ -16,14 +18,17 @@
             <HintPath>$(GameInstallDir)\data_Atomcraft_windows_x86_64\GodotSharp.dll</HintPath>
             <Private>false</Private>
         </Reference>
+        <Reference Include="Newtonsoft.Json">
+            <HintPath>$(GameInstallDir)\data_Atomcraft_windows_x86_64\Newtonsoft.Json.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="GodotMonoModLoader">
+            <HintPath>$(GameInstallDir)\GodotMonoModLoader\GodotMonoModLoader.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
     </ItemGroup>
 
-    <ItemGroup>
-        <GDScripts Include="$(ProjectDir)GDScripts\**\*" />
-    </ItemGroup>
 
-    
-    
     <Target Name="CreateModZip" AfterTargets="Build">
 
         <PropertyGroup>
@@ -39,10 +44,6 @@
         <Copy
                 SourceFiles="$(TargetPath)"
                 DestinationFolder="$(ModDir)/$(ModName)" />
-
-        <Copy
-                SourceFiles="@(GDScripts)"
-                DestinationFolder="$(ModDir)/$(ModName)"/>
 
         <Copy
                 SourceFiles="$(ProjectDir)mod.json"
@@ -63,7 +64,7 @@
 
     </Target>
 
-    <Target Name="InstallModZip" AfterTargets="Build">
+    <Target Name="InstallModZip" AfterTargets="Build" DependsOnTargets="CreateModZip">
 
         <PropertyGroup>
             <InstallDir>$(AppData)/Godot/app_userdata/Atomcraft/Mods</InstallDir>

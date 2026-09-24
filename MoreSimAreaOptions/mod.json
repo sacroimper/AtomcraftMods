@@ -8,7 +8,7 @@
     {
       "moduleId": "MoreSimAreaOptions/Main",
       "dll": "MoreSimAreaOptions.dll",
-      "initClass": "MoreSimAreaOptions.ModEntry",
+      "entryClass": "MoreSimAreaOptions.ModEntry",
       "dependencies": []
     }
   ]

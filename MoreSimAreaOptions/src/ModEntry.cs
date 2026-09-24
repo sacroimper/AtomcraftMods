@@ -1,21 +1,17 @@
 
 using Godot;
+using GodotMonoModLoader;
+using GodotMonoModLoader.Atomcraft;
 
 namespace MoreSimAreaOptions;
 
-public static class ModEntry
+public class ModEntry : AtomcraftModEntry, IModInitializationProvider<ModConfig>
 {
-    public static void Initialize()
+    public void Initialize(InitializationContext<ModConfig> context)
     {
         
-        Consts.SUPPORTED_SIM_RESOLUTIONS.Add(new Vector2I(8, 8));
-        Consts.SUPPORTED_SIM_RESOLUTIONS.Add(new Vector2I(10, 10));
-        Consts.SUPPORTED_SIM_RESOLUTIONS.Add(new Vector2I(12, 12));
-        Consts.SUPPORTED_SIM_RESOLUTIONS.Add(new Vector2I(14, 14));
-        Consts.SUPPORTED_SIM_RESOLUTIONS.Add(new Vector2I(16, 16));
-        Consts.SUPPORTED_SIM_RESOLUTIONS.Add(new Vector2I(18, 18));
-        Consts.SUPPORTED_SIM_RESOLUTIONS.Add(new Vector2I(20, 20));
+        context.ModConfig.SimAreaOptions.ForEach(v => Consts.SUPPORTED_SIM_RESOLUTIONS.Add(v));
         
-        GD.Print($"[MoreSimAreaOptions] MoreSimAreaOptions Initialized.");
+        GD.Print($"[MoreSimAreaOptions]: MoreSimAreaOptions Initialized.");
     }
 }
